@@ -65,6 +65,6 @@ def get_title(instance):
     headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
     req = requests.get(instance.link, headers=headers).text
-    soup = BeautifulSoup(requests.get(instance.link).content, features="html.parser")
+    soup = BeautifulSoup(req, features="html.parser")
     if soup.title:
         return title_filter(soup.title.string)
