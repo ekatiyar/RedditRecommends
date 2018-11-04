@@ -1,0 +1,5 @@
+Flask
+gunicorn
+praw
+requests
+beautifulsoup4
