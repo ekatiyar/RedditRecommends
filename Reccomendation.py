@@ -31,7 +31,7 @@ def text_parse(text, score):
         if soup.title:
             prod_name = title_filter(soup.title.string)
             Recommendations.append(Recommendation(prod_name, score, text, link))
-    return []
+    return Recommendations
 
 def LinkParser(linkslist):
     Recommendations = []
@@ -43,13 +43,11 @@ def LinkParser(linkslist):
             for comment in sub.comments.list():
                 Recommendations.extend(text_parse(comment.body, comment.score))
         except praw.exceptions.ClientException:
-            print("ruh roh")
+            print("ruh roh") #implement Wiki Exception
     return Recommendations
 
-# links = ["https://www.reddit.com/r/MechanicalKeyboards/comments/7js58d/what_mechanical_keyboard_should_i_buy/",
-#          "https://www.reddit.com/r/MechanicalKeyboards/comments/8ekjay/best_mechanical_keyboard_100200/",
-#          "https://www.reddit.com/r/MechanicalKeyboards/comments/8lk5nh/mechanical_keyboard_suggestions/"]
+links = ["https://www.reddit.com/r/MechanicalKeyboards/comments/7js58d/what_mechanical_keyboard_should_i_buy/",
+         "https://www.reddit.com/r/MechanicalKeyboards/comments/8ekjay/best_mechanical_keyboard_100200/",
+         "https://www.reddit.com/r/MechanicalKeyboards/comments/8lk5nh/mechanical_keyboard_suggestions/"]
 
-links = [""]
-
-LinkParser(links)
+print(LinkParser(links))
