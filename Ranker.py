@@ -1,7 +1,7 @@
-from Reccomendation import Recommendation
+from Reccomendation import Recommendation, get_title
 
-def ranking(RecDic):
-    return rank_helper(remove_duplicates(RecDic))
+def ranking(RecDic, numitems):
+    return rank_helper(remove_duplicates(RecDic), numitems)
 
 def remove_duplicates(RecDic): # Filters list of any reoccurung links.
     Recs = RecDic.values()
@@ -23,11 +23,12 @@ def remove_duplicates(RecDic): # Filters list of any reoccurung links.
             Recs.extend([Recommendation(prod.prod_name, score, "", prod.link, 1)])
     return Recs
 
-def rank_helper(listance): # Ranks products according to score.
-    return sorted(listance, key = lambda rec: rec.score, reverse=True)
-
-# links = ["https://www.reddit.com/r/MechanicalKeyboards/comments/7js58d/what_mechanical_keyboard_should_i_buy/",
-#          "https://www.reddit.com/r/MechanicalKeyboards/comments/8ekjay/best_mechanical_keyboard_100200/",
-#          "https://www.reddit.com/r/MechanicalKeyboards/comments/8lk5nh/mechanical_keyboard_suggestions/"]
-#
-# reccs = LinkParser(links)
+def rank_helper(listance, numitems): # Ranks products according to score.
+    s_listance = sorted(listance, key = lambda rec: rec.score, reverse=True)[:numitems]
+    for instance in s_listance[:]:
+        title = get_title(instance)
+        if title:
+            instance.prod_name = title
+        else:
+            s_listance.remove(instance)
+    return s_listance

@@ -6,9 +6,10 @@ URL_REGEX = r"""(?i)\b((?:https?:(?:/{1,3}|[a-z0-9%])|[a-z0-9.\-]+[.](?:com|net|
 WEBFILTER = ['reddit', 'gfycat', 'imgur', '.jpg', '.png']
 WIKI_SCORE = 5
 CONSIDER_WIKI=True
+SUB_DIVISOR = 10
 
 class Recommendation:
-    def __init__(self, prod_name, score, text, link, sentiment = 1):
+    def __init__(self, score, text, link, sentiment = 1, prod_name = None):
         self.prod_name = prod_name
         self.score = score*sentiment
         self.text = text
@@ -16,7 +17,7 @@ class Recommendation:
         self.sentiment = sentiment
 
     def __hash__(self):
-        return hash(str(self.link+self.text))
+        return hash(str(self.link+self.text[:61]))
 
     def modify_sentiment(self, newsent):
         self.score*=newsent/self.sentiment
@@ -31,15 +32,7 @@ def text_parse(text, score):
     Recommendations = []
     links = [link for link in re.findall(URL_REGEX, text) if all(term not in link.lower() for term in WEBFILTER) and "http" in link]
     for link in links:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
-        req = requests.get(link, headers=headers).text
-        soup = BeautifulSoup(requests.get(link).content, features="html.parser")
-        if soup.title:
-            prod_name = title_filter(soup.title.string)
-        # if title:
-        #     prod_name = title_filter(title)
-            Recommendations.append(Recommendation(prod_name, score, text, link))
+        Recommendations.append(Recommendation(score, text, link))
     return Recommendations
 
 def LinkParser(linkslist):
@@ -47,7 +40,7 @@ def LinkParser(linkslist):
     for link in linkslist:
         try:
             sub = reddit.submission(url=link)
-            Recommendations.extend(text_parse(sub.selftext, sub.score))
+            Recommendations.extend(text_parse(sub.selftext, sub.score//SUB_DIVISOR))
             #sub.comments.replace_more(limit=None)
             for comment in sub.comments.list():
                 if isinstance(comment, praw.models.reddit.comment.Comment):
@@ -63,14 +56,10 @@ def LinkParser(linkslist):
     RecDic = {hash(r): r for r in Recommendations}
     return RecDic
 
-# a = reddit.subreddit("MechanicalKeyboards").wiki["buying_guide"]
-# print(a.content_md)
-
-# links = ["https://www.reddit.com/r/MechanicalKeyboards/wiki/buying_guide"]
-
-# links = ["https://www.reddit.com/r/MechanicalKeyboards/comments/7js58d/what_mechanical_keyboard_should_i_buy/",
-#          "https://www.reddit.com/r/MechanicalKeyboards/comments/8ekjay/best_mechanical_keyboard_100200/",
-#          "https://www.reddit.com/r/MechanicalKeyboards/comments/8lk5nh/mechanical_keyboard_suggestions/"]
-#
-# l = LinkParser(links)
-# print(l)
+def get_title(instance):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
+    req = requests.get(instance.link, headers=headers).text
+    soup = BeautifulSoup(requests.get(instance.link).content, features="html.parser")
+    if soup.title:
+        return title_filter(soup.title.string)
