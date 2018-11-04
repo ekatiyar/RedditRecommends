@@ -1,0 +1,1 @@
+from Reccomendation import LinkParser #pass in list of reddit links, returns a list of Reccomendation Instances
