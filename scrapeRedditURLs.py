@@ -1,6 +1,7 @@
 import urllib as ul
 from bs4 import BeautifulSoup
-import requests
+import requests, praw, re
+from Reccomendation import reddit, CONSIDER_WIKI
 
 def scrape(term, modifier = "best"):
     searchTerm = term
@@ -19,6 +20,20 @@ def scrape(term, modifier = "best"):
     return redditURLs
 
 def remove_duplicates(redditURLs):
-    
+    dic = {}
+    for url in redditURLs:
+        key = submission(url)
+        if key:
+            dic[str(key)] = url
+    return dic.values()
 
-print(len(scrape("earphones")))
+def submission(link):
+    try:
+        return reddit.submission(url=link)
+    except praw.exceptions.ClientException as e:
+        if "wiki" in link and CONSIDER_WIKI:
+            wikiextract = re.sub(r'^(https://www.reddit.com/r/)', '', link)
+            wikiextract = wikiextract.split('/wiki/')
+            return reddit.subreddit(wikiextract[0]).wiki[wikiextract[1]]
+        else:
+            return False
