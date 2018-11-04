@@ -1,11 +1,10 @@
-import pandas
 import urllib as ul
-from bs4 import BeautifulSoup, SoupStrainer
+from bs4 import BeautifulSoup
 import requests
-import webbrowser
-def scrape(term):
+
+def scrape(term, modifier = "best"):
     searchTerm = term
-    searchUrl = "https://google.com/search?q=" + ul.parse.quote_plus(searchTerm+"reddit")
+    searchUrl = "https://google.com/search?q=" + ul.parse.quote_plus("reddit"+modifier+searchTerm)
     response = requests.get(searchUrl)
     query = BeautifulSoup(response.text, "lxml")
     redditURLs = []
@@ -16,4 +15,10 @@ def scrape(term):
             if indexURL != -1:
                 URL = tt[indexURL:]
                 redditURLs.append(URL)
+    redditURLs = remove_duplicates(redditURLs)
     return redditURLs
+
+def remove_duplicates(redditURLs):
+    
+
+print(len(scrape("earphones")))
