@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>calhax reddit search</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+  </head>
+  <body>
+    <h1 class = "rec"> Welcome to Reddit Recommends </h1>
+    <!-- <form action= "{{ url_for('search_links') }}", method="post">
+      <input type="text" placeholder="Search product..." name="processedboi">
+      <button class="fa fa-search button"><a href="{{ url_for('search_links') }}"</button>
+    </form> -->
+    <form action="/search_links" method="post">
+      <input type="search" name="some_data">
+      <button class="fa fa-search"><a href="{{ url_for('search_links') }}"</a></i>
+    </form>
+  </body>
+
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      width: 100%;
+      background: #1B1B1B;
+    }
+
+    form{
+      position: relative;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      transition: all 1s;
+      width: 50px;
+      height: 50px;
+      background: white;
+      box-sizing: border-box;
+      border-radius: 25px;
+      border: 4px solid white;
+      padding: 5px;
+    }
+
+    input{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;;
+      height: 42.5px;
+      line-height: 30px;
+      outline: 0;
+      border: 0;
+      display: none;
+      font-size: 1em;
+      border-radius: 20px;
+      padding: 0 20px;
+    }
+
+    .fa{
+      box-sizing: border-box;
+      padding: 10px;
+      width: 42.5px;
+      height: 42.5px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-radius: 50%;
+      color: #07051a;
+      text-align: center;
+      font-size: 1.2em;
+      transition: all 1s;
+    }
+
+    form:hover{
+      width: 350px;
+      cursor: pointer;
+    }
+
+    form:hover input{
+      display: block;
+    }
+
+    form:hover .fa{
+      background: #07051a;
+      color: white;
+      cursor:pointer;
+    }
+
+    .rec {
+      font-family: 'Quicksand', sans-serif;
+      color: white;
+
+    }
+  </style>
+
+</html>
