@@ -3,9 +3,9 @@ from bs4 import BeautifulSoup
 import requests, praw, re
 from Reccomendation import reddit, CONSIDER_WIKI
 
-def scrape(term, modifier = "best"):
+def scrape(term, modifier = "best "):
     searchTerm = term
-    searchUrl = "https://google.com/search?q=" + ul.parse.quote_plus("reddit"+modifier+searchTerm)
+    searchUrl = "https://google.com/search?q=" + ul.parse.quote_plus("reddit "+modifier+searchTerm)
     response = requests.get(searchUrl)
     query = BeautifulSoup(response.text, "lxml")
     redditURLs = []

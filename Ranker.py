@@ -20,7 +20,7 @@ def remove_duplicates(RecDic): # Filters list of any reoccurung links.
             score = 0
             for product in products:
                 score+=product.score
-            Recs.extend([Recommendation(prod.prod_name, score, "", prod.link, 1)])
+            Recs.extend([Recommendation(score, "", prod.link, 1, prod.prod_name)])
     return Recs
 
 def rank_helper(listance, numitems): # Ranks products according to score.
