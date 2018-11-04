@@ -1,4 +1,4 @@
-// $(document).ready(function () {
-//   $("#bar").hover(function()){
-//     $
-//   }
+$(document).ready(function () {
+  $("#bar").hover(function()){
+    $
+  }
