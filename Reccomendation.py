@@ -31,9 +31,14 @@ def text_parse(text, score):
     Recommendations = []
     links = [link for link in re.findall(URL_REGEX, text) if all(term not in link.lower() for term in WEBFILTER) and "http" in link]
     for link in links:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
+        req = requests.get(link, headers=headers).text
         soup = BeautifulSoup(requests.get(link).content, features="html.parser")
         if soup.title:
             prod_name = title_filter(soup.title.string)
+        # if title:
+        #     prod_name = title_filter(title)
             Recommendations.append(Recommendation(prod_name, score, text, link))
     return Recommendations
 
@@ -43,9 +48,10 @@ def LinkParser(linkslist):
         try:
             sub = reddit.submission(url=link)
             Recommendations.extend(text_parse(sub.selftext, sub.score))
-            sub.comments.replace_more(limit=None)
+            #sub.comments.replace_more(limit=None)
             for comment in sub.comments.list():
-                Recommendations.extend(text_parse(comment.body, comment.score))
+                if isinstance(comment, praw.models.reddit.comment.Comment):
+                    Recommendations.extend(text_parse(comment.body, comment.score))
         except praw.exceptions.ClientException as e:
             if "wiki" in link and CONSIDER_WIKI:
                 wikiextract = re.sub(r'^(https://www.reddit.com/r/)', '', link)
@@ -65,6 +71,6 @@ def LinkParser(linkslist):
 # links = ["https://www.reddit.com/r/MechanicalKeyboards/comments/7js58d/what_mechanical_keyboard_should_i_buy/",
 #          "https://www.reddit.com/r/MechanicalKeyboards/comments/8ekjay/best_mechanical_keyboard_100200/",
 #          "https://www.reddit.com/r/MechanicalKeyboards/comments/8lk5nh/mechanical_keyboard_suggestions/"]
-
+#
 # l = LinkParser(links)
 # print(l)

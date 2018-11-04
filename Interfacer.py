@@ -7,4 +7,8 @@ def search(term, modifier="best"):
     RecDic = LinkParser(linkslist)
     return ranking(RecDic)
 
-print(search("earphones"))
+# s = search("earphones")
+# print(len(s))
+#
+# for rec in s:
+#     print(rec.prod_name, rec.score, rec.link)
