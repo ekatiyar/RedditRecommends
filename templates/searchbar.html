@@ -84,7 +84,10 @@
     }
 
     form:hover .fa{
-      background: #07051a;
+      /*background: #07051a;*/
+      color: #A7ACD9;  /* fallback for old browsers */
+      color: -webkit-linear-gradient(to right, #9E8FB2, #A7ACD9);  /* Chrome 10-25, Safari 5.1-6 */
+      color: linear-gradient(to right, #9E8FB2, #A7ACD9); /
       color: white;
       cursor:pointer;
     }
@@ -106,6 +109,10 @@
 
 
     }
+
+    ::-webkit-scrollbar {
+    display: none;
+  }
   </style>
 
 </html>
