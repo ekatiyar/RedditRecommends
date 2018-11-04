@@ -10,13 +10,16 @@ CONSIDER_WIKI=True
 class Recommendation:
     def __init__(self, prod_name, score, text, link, sentiment = 1):
         self.prod_name = prod_name
-        self.score = score
+        self.score = score*sentiment
         self.text = text
         self.link = link
         self.sentiment = sentiment
 
     def __hash__(self):
         return hash(str(self.link+self.text))
+
+    def modify_sentiment(self, newsent):
+        self.score*=newsent/self.sentiment
 
 def title_filter(prod_name):
     if "amazon.com" in prod_name.lower():
@@ -57,11 +60,11 @@ def LinkParser(linkslist):
 # a = reddit.subreddit("MechanicalKeyboards").wiki["buying_guide"]
 # print(a.content_md)
 
-links = ["https://www.reddit.com/r/MechanicalKeyboards/wiki/buying_guide"]
+# links = ["https://www.reddit.com/r/MechanicalKeyboards/wiki/buying_guide"]
 
 # links = ["https://www.reddit.com/r/MechanicalKeyboards/comments/7js58d/what_mechanical_keyboard_should_i_buy/",
 #          "https://www.reddit.com/r/MechanicalKeyboards/comments/8ekjay/best_mechanical_keyboard_100200/",
 #          "https://www.reddit.com/r/MechanicalKeyboards/comments/8lk5nh/mechanical_keyboard_suggestions/"]
 
-l = LinkParser(links)
-print(l)
+# l = LinkParser(links)
+# print(l)
