@@ -1,34 +1,98 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <!-- <title> product list </title> -->
+    <title> product list </title>
       <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
       <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
       <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
 
-      <ul>
-        {% for link in links %}
-          <dl>
-            <dt id="score"></dt>
-            <dd id="name"></dd>
-            <dd id="link"></dd>
-          </dl>
-        {% endfor %}
-      </ul>
-
-      <!-- <dl>
-        <dt id="score"></dt>
-        <dd id="name"></dd>
+    <!-- <script>
+      // var linkers = {{links}}
+      var text = "";
+      var i;
+      for (i = 0; i < links.length; i++) {
+        text += links[i] + "<br>";
+      }
+      document.getElementById("demo").innerHTML = text;
+    </script> -->
+    <!-- <ul>
+      {% for link in links %}
+       <dl>
+        <dt id="name"></dt>
+        <dd id="score"></dd>
         <dd id="link"></dd>
-      </dl> -->
+      </dl>
+      {% endfor %}
+    </ul> -->
 
-  <script>
-    for (x in links) {
-      document.getElementById("score").innerHTML = x["score"];
-      document.getElementById("name").innerHTML = x["prod_name"];
-      document.getElementById("link").innerHTML = x["link"];
-    }
-  </script>
+    <dl>
+      <dt id="name1"></dt>
+      <dd id="score1"></dd>
+      <dd id="link1"></dd>
+    </dl>
+    <dl>
+      <dt id="name2"></dt>
+      <dd id="score2"></dd>
+      <dd id="link2"></dd>
+    </dl>
+    <dl>
+      <dt id="name3"></dt>
+      <dd id="score3"></dd>
+      <dd id="link3"></dd>
+    </dl>
+    <dl>
+      <dt id="name4"></dt>
+      <dd id="score4"></dd>
+      <dd id="link4"></dd>
+    </dl>
+    <dl>
+      <dt id="name5"></dt>
+      <dd id="score5"></dd>
+      <dd id="link5"></dd>
+    </dl>
+    <dl>
+      <dt id="name6"></dt>
+      <dd id="score6"></dd>
+      <dd id="link6"></dd>
+    </dl>
+    <dl>
+      <dt id="name7"></dt>
+      <dd id="score7"></dd>
+      <dd id="link7"></dd>
+    </dl>
+    <dl>
+      <dt id="name8"></dt>
+      <dd id="score8"></dd>
+      <dd id="link8"></dd>
+    </dl>
+    <dl>
+      <dt id="name9"></dt>
+      <dd id="score9"></dd>
+      <dd id="link9"></dd>
+    </dl>
+    <dl>
+      <dt id="name10"></dt>
+      <dd id="score10"></dd>
+      <dd id="link10"></dd>
+    </dl>
+
+    <script>
+      var nams = {{ names|tojson }};
+      var scrs = {{ scores|tojson }};
+      var lnks = {{ links|tojson }};
+      var i;
+      var j = 1;
+      for (i = 0; i < nams.length; i++) {
+          name = nams[i];
+          score = scrs[i];
+          link = lnks[i];
+          document.getElementById("name"+j).innerHTML = name;
+          document.getElementById("score"+j).innerHTML = score;
+          document.getElementById("link"+j).innerHTML = link;
+          j += 1; 
+      }
+
+    </script>
   </body>
 
   <style>
