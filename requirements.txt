@@ -1,0 +1,6 @@
+Flask
+gunicorn
+praw
+requests
+beautifulsoup4
+lxml
