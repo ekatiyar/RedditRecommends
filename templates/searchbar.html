@@ -11,10 +11,15 @@
       <input type="text" placeholder="Search product..." name="processedboi">
       <button class="fa fa-search button"><a href="{{ url_for('search_links') }}"</button>
     </form> -->
-    <form action="/search_links" method="post">
+    <form id= "bar" action="/search_links" method="post">
       <input type="search" name="some_data" placeholder="Search products...">
       <button class="fa fa-search"><a href="{{ url_for('search_links') }}"</a></i>
     </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+
+
   </body>
 
   <style>
@@ -74,24 +79,6 @@
       transition: all 1s;
     }
 
-    form:hover{
-      width: 350px;
-      cursor: pointer;
-    }
-
-    form:hover input{
-      display: block;
-    }
-
-    form:hover .fa{
-      /*background: #07051a;*/
-      color: #A7ACD9;  /* fallback for old browsers */
-      color: -webkit-linear-gradient(to right, #9E8FB2, #A7ACD9);  /* Chrome 10-25, Safari 5.1-6 */
-      color: linear-gradient(to right, #9E8FB2, #A7ACD9); /
-      color: white;
-      cursor:pointer;
-    }
-
     .rec {
       position: relative;
       text-align: center;
@@ -103,16 +90,35 @@
       color: #A7ACD9;  /* fallback for old browsers */
       color: -webkit-linear-gradient(to right, #9E8FB2, #A7ACD9);  /* Chrome 10-25, Safari 5.1-6 */
       color: linear-gradient(to right, #9E8FB2, #A7ACD9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
-
-
     }
 
-    ::-webkit-scrollbar {
-    display: none;
-  }
+    form:hover {
+      width: 350px;
+      cursor: pointer;
+    }
+
+
+    /*form:hover #rec {
+      display: block;
+    }*/
+
+
+    form:hover input{
+      display: block;
+    }
+
+    form:hover .fa{
+      /*background: #07051a;*/
+      background: : #A7ACD9;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #9E8FB2, #A7ACD9);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #9E8FB2, #A7ACD9); /
+      color: white;
+      cursor:pointer;
+    }
+
+
+
+
   </style>
 
 </html>
