@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for, flash, redirect
-import scrapeRedditURLs
+import Interfacer
+import json
 
 app = Flask(__name__)
 @app.route("/")
@@ -15,7 +16,11 @@ def search_home():
 @app.route("/search_links", methods=['POST'])
 def search_links():
     the_text = request.form['some_data']
-    links = scrapeRedditURLs.scrape(the_text)
+    objs = Interfacer.search(the_text)
+    links = []
+    for obj in objs:
+        json_readable = json.dumps(obj, default=lambda o: o.__dict__)
+        links.append(json_readable)
     return render_template("links.html", links=links)
 
 if __name__ == "__main__":

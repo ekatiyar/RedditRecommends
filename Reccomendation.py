@@ -10,7 +10,7 @@ SUB_DIVISOR = 10
 
 class Recommendation:
     def __init__(self, score, text, link, sentiment = 1, prod_name = None):
-        self.prod_name = prod_name
+        self.prod_name = prod_name 
         self.score = score*sentiment
         self.text = text
         self.link = link

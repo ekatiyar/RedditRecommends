@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <!-- <script>
-      // var linkers = {{links}}
-      var text = "";
-      var i;
-      for (i = 0; i < links.length; i++) {
-        text += links[i] + "<br>";
-      }
-      document.getElementById("demo").innerHTML = text;
-    </script> -->
-    <ul>
-      {% for link in links %}
-      <li>{{ link }}</a></li>
-      {% endfor %}
-    </ul>
+    <!-- <title> product list </title> -->
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+      <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+      <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
 
+      <ul>
+        {% for link in links %}
+          <dl>
+            <dt id="score"></dt>
+            <dd id="name"></dd>
+            <dd id="link"></dd>
+          </dl>
+        {% endfor %}
+      </ul>
 
-    <h2> hello world </h2>
+      <!-- <dl>
+        <dt id="score"></dt>
+        <dd id="name"></dd>
+        <dd id="link"></dd>
+      </dl> -->
+
+  <script>
+    for (x in links) {
+      document.getElementById("score").innerHTML = x["score"];
+      document.getElementById("name").innerHTML = x["prod_name"];
+      document.getElementById("link").innerHTML = x["link"];
+    }
+  </script>
   </body>
+
+  <style>
+  body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+    background: #1B1B1B;
+  }
+
 </html>
