@@ -1,4 +1,4 @@
-from Reccomendation import LinkParser, Recommendation
+from Reccomendation import Recommendation
 
 def ranking(RecDic):
     return rank_helper(remove_duplicates(RecDic))
