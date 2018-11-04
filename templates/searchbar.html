@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
   </head>
   <body>
-    <
     <h1 class = "rec"> Welcome to Reddit Recommends </h1>
-    <form action="scrapeRedditURLs.py">
-      <input type="search" placeholder="Search product...">
-      <button class="fa fa-search button"></button>
+    <!-- <form action= "{{ url_for('search_links') }}", method="post">
+      <input type="text" placeholder="Search product..." name="processedboi">
+      <button class="fa fa-search button"><a href="{{ url_for('search_links') }}"</button>
+    </form> -->
+    <form action="/search_links" method="post">
+      <input type="search" name="some_data">
+      <button class="fa fa-search"><a href="{{ url_for('search_links') }}"</a></i>
     </form>
-
   </body>
 
   <style>
@@ -82,6 +84,7 @@
     form:hover .fa{
       background: #07051a;
       color: white;
+      cursor:pointer;
     }
 
     .rec {

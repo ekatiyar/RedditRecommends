@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html>
   <body>
-    {%for i in links%}
-      <p> {{i[0]}}</p>
-    {%endfor%}
+    <!-- <script>
+      // var linkers = {{links}}
+      var text = "";
+      var i;
+      for (i = 0; i < links.length; i++) {
+        text += links[i] + "<br>";
+      }
+      document.getElementById("demo").innerHTML = text;
+    </script> -->
+    <ul>
+      {% for link in links %}
+      <li>{{ link }}</a></li>
+      {% endfor %}
+    </ul>
+
+
+    <h2> hello world </h2>
   </body>
 </html>

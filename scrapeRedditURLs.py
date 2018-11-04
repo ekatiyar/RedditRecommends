@@ -3,11 +3,9 @@ import urllib as ul
 from bs4 import BeautifulSoup, SoupStrainer
 import requests
 import webbrowser
-import main
-
 def scrape(term):
     searchTerm = term
-    searchUrl = "https://google.com/search?q=" + ul.parse.quote_plus(searchTerm)
+    searchUrl = "https://google.com/search?q=" + ul.parse.quote_plus(searchTerm+"reddit")
     response = requests.get(searchUrl)
     query = BeautifulSoup(response.text, "lxml")
     redditURLs = []
@@ -18,3 +16,4 @@ def scrape(term):
             if indexURL != -1:
                 URL = tt[indexURL:]
                 redditURLs.append(URL)
+    return redditURLs

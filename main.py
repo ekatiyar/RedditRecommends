@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, flash, redirect
 import scrapeRedditURLs
 
 app = Flask(__name__)
@@ -6,17 +6,16 @@ app = Flask(__name__)
 def search_home():
     return render_template("searchbar.html")
 
-@app.route('/', methods=['POST'])
-def search_home_post():
-    text = request.form['text']
-    processed_text = text.upper()
-    return processed_text
+# @app.route('/process', methods=['POST'])
+# def process():
+#     the_text = request.form['some_data']
+#     return "text is:" + the_text
 
 
-@app.route("/links")
+@app.route("/search_links", methods=['POST'])
 def search_links():
-    # links = scrapeRedditURLs.redditURLs
-    links = scrape(search_home_post())
+    the_text = request.form['some_data']
+    links = scrapeRedditURLs.scrape(the_text)
     return render_template("links.html", links=links)
 
 if __name__ == "__main__":
