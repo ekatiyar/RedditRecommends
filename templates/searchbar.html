@@ -4,16 +4,15 @@
     <title>calhax reddit search</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
-  </head>
+    <link href="https://fonts.googleapis.com/css?family=Allerta" rel="stylesheet">
   <body>
-    <h1 class = "rec"> Welcome to Reddit Recommends </h1>
+    <div class = "rec"> Welcome to Reddit Recommends </div>
     <!-- <form action= "{{ url_for('search_links') }}", method="post">
       <input type="text" placeholder="Search product..." name="processedboi">
       <button class="fa fa-search button"><a href="{{ url_for('search_links') }}"</button>
     </form> -->
     <form action="/search_links" method="post">
-      <input type="search" name="some_data">
+      <input type="search" name="some_data" placeholder="Search products...">
       <button class="fa fa-search"><a href="{{ url_for('search_links') }}"</a></i>
     </form>
   </body>
@@ -66,7 +65,10 @@
       top: 0;
       right: 0;
       border-radius: 50%;
-      color: #07051a;
+      /*color: #07051a;*/
+      color: #A7ACD9;  /* fallback for old browsers */
+      color: -webkit-linear-gradient(to right, #9E8FB2, #A7ACD9);  /* Chrome 10-25, Safari 5.1-6 */
+      color: linear-gradient(to right, #9E8FB2, #A7ACD9); /
       text-align: center;
       font-size: 1.2em;
       transition: all 1s;
@@ -88,8 +90,20 @@
     }
 
     .rec {
-      font-family: 'Quicksand', sans-serif;
-      color: white;
+      position: relative;
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
+      /*color: #dbdbdb;*/
+      font-size: 50px;
+      font-weight: 200px;
+      top: 130px;
+      color: #A7ACD9;  /* fallback for old browsers */
+      color: -webkit-linear-gradient(to right, #9E8FB2, #A7ACD9);  /* Chrome 10-25, Safari 5.1-6 */
+      color: linear-gradient(to right, #9E8FB2, #A7ACD9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+
 
     }
   </style>
